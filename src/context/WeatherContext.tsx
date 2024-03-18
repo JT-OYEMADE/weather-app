@@ -102,7 +102,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
           notification.warning({
             message: 'Location Access Denied',
             description: 'Defaulting to Lagos. Allow location access for weather updates based on your current location.',
-            duration: 1,
+            duration: 2,
           });
           fetchWeather(); // Fallback to default location (Lagos)
         });
@@ -111,7 +111,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
         notification.warning({
           message: 'Geolocation Not Supported',
           description: 'Defaulting to Lagos. Geolocation is not supported by this browser',
-          duration: 1,
+          duration: 2,
         });
         fetchWeather(); // Fallback to default location (Lagos)
       }
