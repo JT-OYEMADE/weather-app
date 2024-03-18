@@ -1,50 +1,27 @@
 import { useEffect, useState } from 'react';
-
-// Images
-import Clear from '../../assets/images/Clear.jpg';
-import Fog from '../../assets/images/fog.png';
-import Cloudy from '../../assets/images/Cloudy.jpg';
-import Rainy from '../../assets/images/Rainy.jpg';
-import Snow from '../../assets/images/snow.jpg';
-import Stormy from '../../assets/images/Stormy.jpg';
-import Sunny from '../../assets/images/Sunny.jpg';
 import { useWeatherContext } from '../../context/WeatherContext';
-
-// Define a mapping between condition keys and images
-const conditionImages: { [key: string]: string } = {
-  clear: Clear,
-  cloud: Cloudy,
-  rain: Rainy,
-  shower: Rainy,
-  snow: Snow,
-  fog: Fog,
-  thunder: Stormy,
-  storm: Stormy,
-  sunny: Sunny,
-};
 
 const BgWeatherLayout = () => {
   const { weather } = useWeatherContext();
-  const [image, setImage] = useState<string>(Clear);
+  const [background, setBackground] = useState<string>("from-cyan-700 to-blue-700");
 
   useEffect(() => {
-    // Check if `weather` is a `WeatherValue` and has `conditions`
-    console.log(weather, "weather");
-
-    if ('conditions' in weather && weather.conditions) {
-      const conditions = weather.conditions.toLowerCase();
-      const conditionKey = Object.keys(conditionImages).find(key =>
-        conditions.includes(key)
-      );
-      if (conditionKey) {
-        setImage(conditionImages[conditionKey]);
+    const formatBackground = () => {
+      if (!weather) return "from-cyan-700 to-blue-700";
+      const threshold = 30;
+      if (weather.temp <= threshold) {
+        setBackground("from-cyan-700 to-blue-700"); // Cooler temperature
+      } else {
+        setBackground("from-yellow-700 to-orange-500"); // Warmer temperature
       }
-    }
+    };
+
+    formatBackground();
   }, [weather]);
 
-  return (
-    <img src={image} alt="weather_image" className="h-screen w-full fixed left-0 top-0 -z-[10]" />
-  );
+  const bgClass = `h-screen w-full fixed left-0 top-0 -z-10 bg-gradient-to-br ${background}`;
+
+  return <div className={bgClass}></div>;
 };
 
 export default BgWeatherLayout;

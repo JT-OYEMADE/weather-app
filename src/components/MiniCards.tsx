@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import sun from '../assets/icons/sun.png';
 import cloud from '../assets/icons/cloud.png';
 import fog from '../assets/icons/fog.png';
@@ -6,11 +6,14 @@ import rain from '../assets/icons/rain.png';
 import snow from '../assets/icons/snow.png';
 import storm from '../assets/icons/storm.png';
 import wind from '../assets/icons/windy.png';
+import { WeatherContext } from '../context/WeatherContext';
 
 export const MiniCard = ({ time, temp, iconString }: any) => {
-  // Initialize the state with a string type and null as initial value
-  // You must also specify that the state can be null, hence string | null
   const [icon, setIcon] = useState<string | null>(null);
+
+  const { temperatureUnit } = useContext(WeatherContext);
+
+  const displayTemperature = temperatureUnit === 'Celsius' ? temp : (temp * 9 / 5) + 32;
 
   useEffect(() => {
     if (iconString) {
@@ -29,7 +32,6 @@ export const MiniCard = ({ time, temp, iconString }: any) => {
       } else if (iconString.toLowerCase().includes('wind')) {
         setIcon(wind);
       } else {
-        // If no condition is met, you might want to set a default icon or leave it as null
         setIcon(null);
       }
     }
@@ -42,10 +44,9 @@ export const MiniCard = ({ time, temp, iconString }: any) => {
       </p>
       <hr />
       <div className='w-full flex justify-center items-center flex-1'>
-        {/* Conditional rendering to avoid trying to render an icon when it's null */}
         {icon ? <img src={icon} alt="weather condition icon" className='w-[4rem] h-[4rem]' /> : <span>Forecast not available</span>}
       </div>
-      <p className='text-center font-bold'>{temp}&deg;C</p>
+      <p className='text-center font-bold'>{displayTemperature.toFixed(1)} &deg;{temperatureUnit === 'Celsius' ? 'C' : 'F'}</p>
     </div>
   );
 };

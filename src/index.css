@@ -16,4 +16,5 @@
   -webkit-backdrop-filter: blur(8px);
   border-radius: 10px;
   border: 1px solid rgba(225, 225, 225, 0.18);
+  padding: 10px;
 }
