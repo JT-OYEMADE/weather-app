@@ -1,44 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import axios from 'axios';
 import { notification } from "antd";
-import { ReactNode } from "react";
+import { WeatherContextProviderProps, WeatherLocation, WeatherValue, defaultContextValue, defaultWeatherValue } from "../types";
 
-interface WeatherContextProviderProps {
-  children: ReactNode;
-}
 
-interface WeatherLocation {
-  address: string;
-  values: WeatherValue[];
-}
-
-interface WeatherValue {
-  datetime: any;
-  temperature: number;
-  windSpeed: number;
-  precipitation: number;
-  date: string;
-  wspd: number;
-  humidity: number;
-  temp: number;
-  heatindex: number;
-  conditions: string;
-}
-
-const defaultWeatherValue: WeatherValue = {
-  temperature: 0,
-  windSpeed: 0,
-  precipitation: 0,
-  date: "",
-  humidity: 0,
-  wspd: 0,
-  heatindex: 0,
-  conditions: "",
-  temp: 0,
-  datetime: ""
-};
-
-interface WeatherContextType {
+export interface WeatherContextType {
   weather: WeatherValue;
   location: string;
   setPlace: (place: string) => void;
@@ -50,20 +16,6 @@ interface WeatherContextType {
   toggleWindSpeedUnit: () => void;
   isLoading: boolean
 }
-
-
-const defaultContextValue: WeatherContextType = {
-  weather: defaultWeatherValue,
-  location: '',
-  setPlace: () => { },
-  values: [],
-  place: 'Lagos',
-  temperatureUnit: '',
-  toggleTemperatureUnit: () => { },
-  windSpeedUnit: '',
-  toggleWindSpeedUnit: () => { },
-  isLoading: false
-};
 
 export const WeatherContext = createContext<WeatherContextType>(defaultContextValue);
 
@@ -91,7 +43,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
       url: 'https://visual-crossing-weather.p.rapidapi.com/forecast',
       params: {
         aggregateHours: '24',
-        location: place,
+        location: locationQuery,
         contentType: 'json',
         unitGroup: 'metric',
         shortColumnNames: 0,

@@ -14,10 +14,7 @@ import { Spin } from 'antd';
 function App() {
   const [input, setInput] = useState('');
   const weatherContext = useWeatherContext();
-  const { isLoading } = useWeatherContext();
-
-
-
+  const { isLoading } = useWeatherContext()
   const { weather, location, setPlace, values } = weatherContext;
   const { temperatureUnit, toggleTemperatureUnit } = useContext(WeatherContext);
   const handleToggleUnit = (unit: string) => {
@@ -36,14 +33,14 @@ function App() {
   return (
     <div className='w-full h-screen text-white px-8'>
 
-      <nav className='w-full p-3 flex justify-between items-center'>
-        <h1 className='font-bold tracking-wide text-3xl'>Weather App</h1>
-        <div className='flex flex-row justify-between gap-5'>
+      <nav className='w-full p-3 flex justify-between flex-col md:flex-row items-center'>
+        <h1 className='font-bold tracking-wide text-3xl mb-3'>Weather App</h1>
+        <div className='flex flex-col md:flex-row justify-between gap-5'>
           <form onSubmit={submitCity} className='bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2'>
             <img src={searchIcon} alt="Search" className='w-[1.5rem] h-[1.5rem]' />
             <input type="text" placeholder='Search city' className='focus:outline-none w-full rounded-md text-[#212121] text-md' value={input} onChange={e => setInput(e.target.value)} />
           </form>
-          <div className='flex flex-row font-bold text-2xl justify-between items-center gap-1'>
+          <div className='flex flex-row font-bold text-2xl md:justify-between justify-center items-center gap-1'>
             <h1 className='cursor-pointer' onClick={() => handleToggleUnit('Celsius')}>&deg;C</h1> | <h1 className='cursor-pointer' onClick={() => handleToggleUnit('Fahrenheit')}>&deg;F</h1>
           </div>
         </div>

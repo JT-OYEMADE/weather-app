@@ -10,18 +10,6 @@ import wind from '../assets/icons/windy.png'
 import '../index.css'
 import { WeatherContext } from '../context/WeatherContext';
 
-interface WeatherValue {
-  temperature: number;
-  windSpeed: number;
-  precipitation: number;
-  date: string; // Assuming the date is a string, adjust according to your API's format
-  conditions?: string;
-  humidity?: string;
-  windspeed?: any;
-  place?: string;
-  heatIndex?: any
-  iconString?: string
-}
 
 export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex, iconString, conditions }: any) => {
 
@@ -30,7 +18,7 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
   const { temperatureUnit, windSpeedUnit, toggleWindSpeedUnit } = useContext(WeatherContext);
 
   const displayTemperature = temperatureUnit === 'Celsius' ? temperature : (temperature * 9 / 5) + 32;
-  const displayWindSpeed = windSpeedUnit === 'km/h' ? windspeed : windspeed / 1.609; // 1 mile = 1.609 kilometers
+  const displayWindSpeed = windSpeedUnit === 'km/h' ? windspeed : windspeed / 1.609;
 
   useEffect(() => {
     if (iconString) {
