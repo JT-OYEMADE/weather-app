@@ -10,16 +10,20 @@ import wind from '../assets/icons/windy.png'
 import '../index.css'
 import { WeatherContext } from '../context/WeatherContext';
 
-
+// Define the WeatherCard component
 export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex, iconString, conditions }: any) => {
-
+  // State variable for the weather icon
   const [icon, setIcon] = useState(sun)
+  // Custom hook to get current date and time
   const { time } = useDate()
+  // Context for accessing weather settings
   const { temperatureUnit, windSpeedUnit, toggleWindSpeedUnit } = useContext(WeatherContext);
 
+  // Convert temperature and wind speed based on selected units
   const displayTemperature = temperatureUnit === 'Celsius' ? temperature : (temperature * 9 / 5) + 32;
   const displayWindSpeed = windSpeedUnit === 'km/h' ? windspeed : windspeed / 1.609;
 
+  // Effect to set weather icon based on iconString
   useEffect(() => {
     if (iconString) {
       if (iconString.toLowerCase().includes('cloud')) {
@@ -40,10 +44,13 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
     }
   }, [iconString])
 
+  // Function to capitalize the first letter of a string
   const capitalizeFirstLetter = (string: string) => {
     if (!string) return "";
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  // Render the WeatherCard component
   return (
     <div className='w-[22rem] min-w-[22rem] h-[30rem] glasscard p-4 mb-5'>
       <div className='glass-card'>

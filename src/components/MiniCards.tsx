@@ -8,13 +8,18 @@ import storm from '../assets/icons/storm.png';
 import wind from '../assets/icons/windy.png';
 import { WeatherContext } from '../context/WeatherContext';
 
+// Define the MiniCard component
 export const MiniCard = ({ time, temp, iconString }: any) => {
+  // State variable for the weather icon
   const [icon, setIcon] = useState<string | null>(null);
 
+  // Context for accessing weather settings
   const { temperatureUnit } = useContext(WeatherContext);
 
+  // Convert temperature based on selected unit
   const displayTemperature = temperatureUnit === 'Celsius' ? temp : (temp * 9 / 5) + 32;
 
+  // Effect to set weather icon based on iconString
   useEffect(() => {
     if (iconString) {
       if (iconString.toLowerCase().includes('cloud')) {
@@ -37,6 +42,7 @@ export const MiniCard = ({ time, temp, iconString }: any) => {
     }
   }, [iconString]);
 
+  // Render the MiniCard component
   return (
     <div className='glassCard w-[10rem] h-[10rem] p-4 flex flex-col'>
       <p className='text-center'>
