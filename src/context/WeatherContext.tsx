@@ -70,7 +70,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
         notification.success({
           message: 'Weather Data Updated',
           description: `The weather forecast for ${place} has been successfully updated.`,
-          duration: 1.5,
+          duration: 2,
         });
       }
       setIsLoading(false);
@@ -102,7 +102,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
           notification.warning({
             message: 'Location Access Denied',
             description: 'Defaulting to Lagos. Allow location access for weather updates based on your current location.',
-            duration: 2,
+            duration: 2.5,
           });
           fetchWeather(); // Fallback to default location (Lagos)
         });
@@ -111,7 +111,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
         notification.warning({
           message: 'Geolocation Not Supported',
           description: 'Defaulting to Lagos. Geolocation is not supported by this browser',
-          duration: 2,
+          duration: 2.5,
         });
         fetchWeather(); // Fallback to default location (Lagos)
       }
