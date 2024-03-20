@@ -45,7 +45,7 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   return (
-    <div className='w-[22rem] min-w-[22rem] h-[30rem] glasscard p-4 mb-5'>
+    <div className='w-[22rem] min-w-[22rem] h-[30rem] glasscard p-4 mb-7'>
       <div className='glass-card'>
         <p className='font-bold text-xl'>{displayWindSpeed.toFixed(2)} {windSpeedUnit}</p>
         <button onClick={toggleWindSpeedUnit}> Switch to {windSpeedUnit === 'km/h' ? 'mph' : 'km/h'}</button>
@@ -70,7 +70,7 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
         <p className='text-lg'>{heatIndex ? heatIndex : 'N/A'}</p>
       </div>
       <hr className='bg-slate-600' />
-      <div className='w-full p-4 flex justify-center items-center text-3xl font-semibold'>
+      <div className='w-full p-4 flex justify-center items-center text-3xl font-normal'>
         {conditions}
       </div>
     </div>
