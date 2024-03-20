@@ -67,6 +67,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
         const thisData = Object.values(response.data.locations)[0] as WeatherLocation;
         setWeather(thisData.values[0]); // Set current weather data
         setValues(thisData.values); // Set array of weather values
+        setPlace(thisData.address)
         notification.success({
           message: 'Weather Data Updated',
           description: `The weather forecast for ${place} has been successfully updated.`,
@@ -101,7 +102,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
           // Handle error or user denial for location access
           notification.warning({
             message: 'Location Access Denied',
-            description: 'Defaulting to Lagos. Allow location access for weather updates based on your current location.',
+            description: 'Allow location access for weather updates based on your current location.',
             duration: 2.5,
           });
           fetchWeather(); // Fallback to default location (Lagos)
