@@ -43,7 +43,7 @@ export const WeatherContextProvider: React.FC<WeatherContextProviderProps> = ({ 
   // Function to fetch weather data from API
   const fetchWeather = useCallback(async (lat?: number, lon?: number) => {
     setIsLoading(true);
-    const locationQuery = lat && lon ? `${lat},${lon}` : place;
+    const locationQuery = (lat && lon) ? place : place;
     const options = {
       method: 'GET',
       url: 'https://visual-crossing-weather.p.rapidapi.com/forecast',
