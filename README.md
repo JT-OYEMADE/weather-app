@@ -27,7 +27,7 @@ This Weather App provides users with real-time weather data for various location
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone <github.com/JT-OYEMADE/weather-app>
 ```
 2. Navigate to the project directory:
 
